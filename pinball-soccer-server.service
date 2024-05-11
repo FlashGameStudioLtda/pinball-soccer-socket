@@ -1,0 +1,22 @@
+[Unit]
+Description=PinballSoccer Socket Server
+After=syslog.target network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+User=root
+# do chdir before running the service
+WorkingDirectory=/root/pinball-soccer-socket/
+StartLimitIntervalSec=0
+ExecStart=/usr/bin/node app.js
+
+# limit CPU and RAM quota for our service
+CPUAccounting=true
+CPUQuota=20%
+MemoryAccounting=true
+MemoryLimit=500M
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
