@@ -46,7 +46,7 @@ io.on('connection', async (socket) => {
 
     socket.on('joinOrCreateRoom', async (player) => {
         console.log(`JoinOrCreateRoom receive data ${player}`);
-        
+
         player.socketId = socket.id;
         player = await joinOrCreateRoom(socket, player);
 
@@ -72,6 +72,8 @@ io.on('connection', async (socket) => {
     socket.on('continueWithConnection', async () => {
         socket.emit('continueWithConnection');
     });
+
+    socket.emit('ping');
 });
 
 async function findAvailableRoom(tableId) {
@@ -84,7 +86,7 @@ async function joinOrCreateRoom(socket, player) {
     
     let room = null;
 
-    room = await findAvailableRoom(tableId);
+    room = await findAvailableRoom(player.tableId);
 
     console.log(`Room found ${room}`);
 
