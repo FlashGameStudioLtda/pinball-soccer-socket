@@ -77,9 +77,12 @@ io.on('connection', async (socket) => {
 });
 
 async function findAvailableRoom(tableId) {
-    return rooms.forEach(room => {
-        return room.tableId == tableId && room.available == true;
-    });
+
+    for (let key in rooms) {
+        if (x[key].tableId == tableId && x[key].available == true) {
+            return x[key];
+        }
+    }
 }
 
 async function joinOrCreateRoom(socket, player) {
