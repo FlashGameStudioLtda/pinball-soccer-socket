@@ -79,8 +79,8 @@ io.on('connection', async (socket) => {
 async function findAvailableRoom(tableId) {
 
     for (let key in rooms) {
-        if (x[key].tableId == tableId && x[key].available == true) {
-            return x[key];
+        if (rooms[key].tableId == tableId && rooms[key].available == true) {
+            return rooms[key];
         }
     }
 }
