@@ -45,6 +45,8 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('joinOrCreateRoom', async (player) => {
+        console.log(`JoinOrCreateRoom receive data ${player}`);
+        
         player.socketId = socket.id;
         player = await joinOrCreateRoom(socket, player);
 
