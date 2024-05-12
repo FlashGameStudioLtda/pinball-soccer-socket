@@ -57,7 +57,7 @@ io.on('connection', async (socket) => {
                 rooms[room.id].available = false;
                 io.to(room.id).emit('startGame');
             }
-            
+
             console.log(`Player ${socket.playFabId} connected on room ${player.roomId}`);
         }
     });
@@ -83,7 +83,9 @@ async function joinOrCreateRoom(socket, player) {
     let room = null;
 
     room = await findAvailableRoom(tableId);
-    
+
+    console.log(`Room found ${room}`);
+
     if (room == null) {
         const newRoomId = uuidv4();
         room = new Room(newRoomId, player.tableId);
@@ -94,6 +96,8 @@ async function joinOrCreateRoom(socket, player) {
 
     rooms[room.id].socketIds.push(socket.id);
     
+    console.log(`Entering on room ${room.id}.`);
+
     socket.roomId = room.id;
     player.roomId = room.id;
 
