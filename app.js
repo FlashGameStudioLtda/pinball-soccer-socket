@@ -55,9 +55,9 @@ io.on('connection', async (socket) => {
             socket.join(player.roomId);
             io.to(player.roomId).emit('onJoinedRoom', player);
 
-            if(rooms[room.id].socketIds.length == 2){
-                rooms[room.id].available = false;
-                io.to(room.id).emit('startGame');
+            if(rooms[player.roomId].socketIds.length == 2){
+                rooms[player.roomId].available = false;
+                io.to(player.roomId).emit('startGame');
             }
 
             console.log(`Player ${socket.playFabId} connected on room ${player.roomId}`);
